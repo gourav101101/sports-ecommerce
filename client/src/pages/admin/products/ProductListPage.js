@@ -39,8 +39,7 @@ const ProductListPage = () => {
         }
     };
 
-    // --- RECOMMENDED IMPROVEMENT ---
-    // This helper function now correctly handles both 'simple' and 'variant' products.
+     // This helper function now correctly handles both 'simple' and 'variant' products.
     const getDisplayData = (product) => {
         // Handle 'simple' products first
         if (product.productType === 'simple') {
@@ -109,7 +108,7 @@ const ProductListPage = () => {
                         return (
                             <tr key={product._id}>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <img src={product.imageUrl} alt={product.name} className="h-10 w-10 rounded-full object-cover" />
+                                    <img src={`http://localhost:5000/${product.imageUrl}`} alt={product.name} className="h-10 w-10 rounded-full object-cover" />
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{product.name}</td>
                                 {/* --- RENDER THE NEW, SAFE DATA --- */}

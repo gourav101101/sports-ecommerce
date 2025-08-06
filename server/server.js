@@ -11,11 +11,15 @@ connectDB();
 
 const app = express();
 
+const path = require('path');
+
 // Body parser
 app.use(express.json());
 
 // Enable CORS
 app.use(cors());
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 // --- VERIFY THIS SECTION ---
 // Your router mounting should look exactly like this.
@@ -26,6 +30,8 @@ app.use('/api/orders', require('./routes/orderRoutes'));
 app.use('/api/locations', require('./routes/locationRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/categories', require('./routes/categoryRoutes')); // <-- THIS LINE IS CRITICAL
+
+
 
 const PORT = process.env.PORT || 5000;
 

@@ -1,4 +1,7 @@
 const express = require('express');
+
+const upload = require('../middleware/uploadMiddleware');
+
 const {
     getProducts,
     getProduct,
@@ -13,12 +16,12 @@ const { protect, authorize } = require('../middleware/authMiddleware');
 router
     .route('/')
     .get(getProducts)
-    .post(protect, authorize('admin'), createProduct);
+    .post(protect, authorize('admin'),upload , createProduct);
 
 router
     .route('/:id')
     .get(getProduct)
-    .put(protect, authorize('admin'), updateProduct)
+    .put(protect, authorize('admin'),upload, updateProduct)
     .delete(protect, authorize('admin'), deleteProduct);
 
 module.exports = router;

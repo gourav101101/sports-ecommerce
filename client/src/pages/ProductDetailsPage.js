@@ -86,7 +86,7 @@ const ProductDetailPage = () => {
     return (
         <div className="container mx-auto max-w-6xl py-12 px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div><img src={product.imageUrl} alt={product.name} className="w-full rounded-lg shadow-lg" /></div>
+                <div><img src={`http://localhost:5000/${product.imageUrl}`} alt={product.name} className="w-full rounded-lg shadow-lg" /></div>
                 <div>
                     <h1 className="text-4xl font-bold mb-2">{product.name}</h1>
                     <p className="text-gray-500 mb-6">{product.category}</p>

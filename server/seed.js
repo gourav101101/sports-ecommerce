@@ -51,39 +51,99 @@ const categoryData = [
     { name: 'Team Sports', slug: 'team-sports' },
     { name: 'Racquet Sports', slug: 'racquet-sports' },
     { name: 'Fitness & Training', slug: 'fitness-training' },
+    { name: 'Athletics & Running', slug: 'athletics-running' },
+    { name: 'Outdoor & Adventure', slug: 'outdoor-adventure' },
+    { name: 'Combat Sports', slug: 'combat-sports' },
+    { name: 'Water Sports', slug: 'water-sports' },
+    { name: 'Indoor & Table Games', slug: 'indoor-games' },
 ];
+
 const subCategoryData = (parents) => [
+    // Team Sports
     { name: 'Cricket', slug: 'cricket', parent: parents['Team Sports'] },
     { name: 'Football', slug: 'football', parent: parents['Team Sports'] },
+    { name: 'Basketball', slug: 'basketball', parent: parents['Team Sports'] },
+    { name: 'Volleyball', slug: 'volleyball', parent: parents['Team Sports'] },
+    { name: 'Hockey', slug: 'hockey', parent: parents['Team Sports'] },
+// Racquet Sports
     { name: 'Badminton', slug: 'badminton', parent: parents['Racquet Sports'] },
+    { name: 'Tennis', slug: 'tennis', parent: parents['Racquet Sports'] },
+    { name: 'Table Tennis', slug: 'table-tennis', parent: parents['Racquet Sports'] },
+    { name: 'Squash', slug: 'squash', parent: parents['Racquet Sports'] },
+
+    // Fitness & Training
     { name: 'Gym Equipment', slug: 'gym-equipment', parent: parents['Fitness & Training'] },
+    { name: 'Yoga & Pilates', slug: 'yoga-pilates', parent: parents['Fitness & Training'] },
+    { name: 'Strength Training', slug: 'strength-training', parent: parents['Fitness & Training'] },
+    { name: 'Cardio Equipment', slug: 'cardio-equipment', parent: parents['Fitness & Training'] },
+
+    // Athletics & Running
+    { name: 'Running Shoes', slug: 'running-shoes', parent: parents['Athletics & Running'] },
+    { name: 'Track & Field', slug: 'track-field', parent: parents['Athletics & Running'] },
+    { name: 'Apparel', slug: 'running-apparel', parent: parents['Athletics & Running'] },
+
+    // Outdoor & Adventure
+    { name: 'Cycling', slug: 'cycling', parent: parents['Outdoor & Adventure'] },
+    { name: 'Skateboarding', slug: 'skateboarding', parent: parents['Outdoor & Adventure'] },
+    { name: 'Hiking & Camping', slug: 'hiking-camping', parent: parents['Outdoor & Adventure'] },
+// Combat Sports
+    { name: 'Boxing', slug: 'boxing', parent: parents['Combat Sports'] },
+    { name: 'Wrestling', slug: 'wrestling', parent: parents['Combat Sports'] },
+    { name: 'Martial Arts', slug: 'martial-arts', parent: parents['Combat Sports'] },
+
+    // Water Sports
+    { name: 'Swimming', slug: 'swimming', parent: parents['Water Sports'] },
+    { name: 'Surfing', slug: 'surfing', parent: parents['Water Sports'] },
+
+    // Indoor & Table Games
+    { name: 'Carrom', slug: 'carrom', parent: parents['Indoor & Table Games'] },
+    { name: 'Chess', slug: 'chess', parent: parents['Indoor & Table Games'] },
+    { name: 'Darts', slug: 'darts', parent: parents['Indoor & Table Games'] },
 ];
-// ----------------------------------------------------------------------------------
-// --- THE MAIN CHANGE YOU REQUESTED ---
-// This array now holds all your sample product data.
-// TO PREVENT SEEDING ANY PRODUCTS, SIMPLY MAKE THIS ARRAY EMPTY: const sampleProducts = [];
-// ----------------------------------------------------------------------------------
+
 const sampleProducts = [
-    { // Simple Product
-        name: 'SG Cricket Bat',
+    { // Simple Product 1
+        name: 'SG Cricket Bat - Kashmir Willow',
         description: 'A high-quality Kashmir Willow cricket bat for professional players.',
-        imageUrl: 'https://via.placeholder.com/300x300.png?text=Cricket+Bat',
+        imageUrl: 'uploads/products/placeholder.png', // Using a local placeholder
         productType: 'simple',
-        categoryName: 'Cricket', // We will find the ID for this category name
+        categoryName: 'Cricket',
         price: 2499,
         stock: 50,
     },
-    { // Variant Product
+    { // Simple Product 2 (UNCOMMENTED)
+        name: 'Nivia Storm Football - Size 5',
+        description: 'Durable, all-weather football suitable for training and matches.',
+        imageUrl: 'uploads/products/placeholder.png', // Using a local placeholder
+        productType: 'simple',
+        categoryName: 'Football',
+        price: 899,
+        stock: 150,
+    },
+
+    { // Variant Product 1
         name: 'Pro-Fit Training T-Shirt',
         description: 'A breathable, sweat-wicking t-shirt perfect for any workout.',
-        imageUrl: 'https://via.placeholder.com/300x300.png?text=Training+T-Shirt',
+        imageUrl: 'uploads/products/placeholder.png',
         productType: 'variant',
-        categoryName: 'Gym Equipment', // We will find the ID for this
+        categoryName: 'Gym Equipment',
         optionNames: ['Color', 'Size'],
         variants: [
             { sku: 'TS-BLK-M', options: [{ name: 'Color', value: 'Black' }, { name: 'Size', value: 'M' }], price: 799, stock: 100 },
             { sku: 'TS-BLK-L', options: [{ name: 'Color', value: 'Black' }, { name: 'Size', value: 'L' }], price: 799, stock: 120 },
             { sku: 'TS-BLU-M', options: [{ name: 'Color', value: 'Blue' }, { name: 'Size', value: 'M' }], price: 849, stock: 80 },
+        ]
+    },
+    { // Variant Product 2
+        name: 'Yonex Badminton Racquet',
+        description: 'Lightweight and powerful racquet for intermediate players.',
+        imageUrl: 'uploads/products/placeholder.png',
+        productType: 'variant',
+        categoryName: 'Badminton',
+        optionNames: ['Grip Size'],
+        variants: [
+            { sku: 'YBR-G4', options: [{ name: 'Grip Size', value: 'G4' }], price: 1999, stock: 40 },
+            { sku: 'YBR-G5', options: [{ name: 'Grip Size', value: 'G5' }], price: 1999, stock: 35 },
         ]
     },
 ];
@@ -114,10 +174,14 @@ const seedCategories = async () => {
     console.log('Categories seeded successfully!');
 };
 
+// --- CLEANED UP PRODUCT SEEDER ---
 const seedProducts = async () => {
     if (sampleProducts.length === 0) return console.log('No sample products to seed.');
 
-    console.log('Checking for sample products to seed...');
+    console.log('Seeding sample products...');
+    // 1. Clear all existing products for a fresh start.
+    await Product.deleteMany({});
+    console.log('Existing products cleared.');
 
     const categories = await Category.find();
     if (categories.length === 0) {
@@ -128,28 +192,21 @@ const seedProducts = async () => {
         return map;
     }, {});
 
+    // 2. Loop and create each product directly.
     for (const productData of sampleProducts) {
-        // --- THIS IS THE NON-DESTRUCTIVE LOGIC ---
-        const existingProduct = await Product.findOne({ name: productData.name });
+        const { categoryName, ...restOfProductData } = productData;
+        const categoryId = categoryMap[categoryName];
 
-        if (!existingProduct) {
-            console.log(`Creating sample product: ${productData.name}`);
-            // Replace categoryName with the actual category ID
-            const { categoryName, ...restOfProductData } = productData;
-            const categoryId = categoryMap[categoryName];
 
-            if (categoryId) {
-                await Product.create({ ...restOfProductData, category: categoryId });
-            } else {
-                console.warn(`Category "${categoryName}" not found for product "${productData.name}". Skipping.`);
-            }
+        if (categoryId) {
+            await Product.create({ ...restOfProductData, category: categoryId });
+            console.log(`Created: ${productData.name}`);
         } else {
-            console.log(`Sample product "${productData.name}" already exists. Skipping.`);
+            console.warn(`Category "${categoryName}" not found for product "${productData.name}". Skipping.`);
         }
     }
-    console.log('Product seeding check complete!');
+    console.log('Product seeding complete!');
 };
-
 
 // --- MAIN RUNNER ---
 const runSeed = async () => {
@@ -157,6 +214,23 @@ const runSeed = async () => {
         await mongoose.connect(process.env.MONGO_URI);
         console.log('MongoDB Connected for Seeding...');
 
+        // --- NEW: AUTOMATICALLY DROP THE OLD, FAULTY INDEX ---
+        // This block will run every time, ensuring the wrong index is gone.
+        console.log('Checking for and removing old product indexes...');
+        const productCollection = mongoose.connection.collection('products');
+        try {
+            // This is the name of the index from your error message
+            await productCollection.dropIndex("variants.sku_1");
+            console.log('Successfully dropped old, non-sparse index.');
+        } catch (err) {
+            // It's okay if this fails. It just means the index didn't exist.
+            if (err.codeName === 'IndexNotFound') {
+                console.log('Old index not found, which is good.');
+            } else {
+                // If it's another error, we should see it.
+                throw err;
+            }
+        }
         const seedType = process.argv[2]?.split('=')[1] || 'all';
 
         if (seedType === 'all' || seedType === 'locations') await seedLocations();

@@ -27,10 +27,10 @@ const ProductCard = ({ product }) => {
         <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden group flex flex-col">
             <Link to={`/product/${product._id}`} className="block overflow-hidden">
                 <img
-                    src={product.imageUrl}
+                    src={`http://localhost:5000/${product.imageUrl}`}
                     alt={product.name}
                     className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
+                    />
             </Link>
 
             <div className="p-4 flex flex-col flex-grow">
